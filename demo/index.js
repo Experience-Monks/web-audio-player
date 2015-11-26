@@ -48,7 +48,7 @@ function canplay () {
     // No media element support -> we should buffer
     var shouldBuffer = !supportsMediaElement
     start(audioContext, shouldBuffer)
-  }, audioContext, undefined, true)
+  }, audioContext)
 }
 
 function start (audioContext, shouldBuffer) {
