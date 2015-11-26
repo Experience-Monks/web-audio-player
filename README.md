@@ -2,7 +2,9 @@
 
 [![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
 
-A simplified cross-browser WebAudio wrapper with a narrow API. This repo also attempts to report and solve some ["Gotchas"](#gotchas) for getting WebAudio working on mobile. It targets new browsers and devices, and does not attempt to provide a non-WebAudio fallback.
+[(demo)](http://jam3.github.io/web-audio-player/)
+
+A simplified cross-browser WebAudio wrapper with a narrow API. This repo also attempts to report and solve some ["WebAudio Gotchas"](#webaudio-gotchas) for getting WebAudio working on mobile. It targets new browsers and devices, and does not attempt to provide a non-WebAudio fallback.
 
 See [caniuse.com WebAudio API](http://caniuse.com/#feat=audio-api).
 
@@ -16,7 +18,7 @@ This module provides a consistent API whether you are using a media element (Chr
 
 ### Demo
 
-[visualizer demo](http://jam3.github.io/codevember/web-audio-player)
+[http://jam3.github.io/web-audio-player/](http://jam3.github.io/web-audio-player/)
 
 The demo uses [web-audio-analyser](https://github.com/hughsk/web-audio-analyser) and [analyser-frequency-average](https://github.com/Jam3/analyser-frequency-average).
 
@@ -30,7 +32,7 @@ Tested with the following.
   - Webkit Nightly
   - FireFox 42.0
   - Chrome 46.0
-  - iOS Chrome with a [gotcha](#gotchas) (iOS 9.2, iPhone 5S)
+  - iOS Chrome with a [gotcha](#webaudio-gotchas) (iOS 9.2, iPhone 5S)
 - Buffers Audio
   - Samsung Galaxy S6 (Chrome 46)
   - iOS Safari (iOS 9.2, iPhone 5S)
@@ -65,7 +67,7 @@ audio.on('ended', () => {
 })
 ```
 
-For a complete mobile/desktop demo, see [demo/index.js](demo/index.js). See [Gotchas](#gotchas) for more details.
+For a complete mobile/desktop demo, see [demo/index.js](demo/index.js). See [Gotchas](#webaudio-gotchas) for more details.
 
 ## Usage
 
@@ -147,14 +149,17 @@ Some new features may be added to this module, such as:
 - Adding a seek or `play(N)` feature
 - Adding a few more events
 - Supporting pause/play with buffered sources if possible
+- Supporting caching or re-using the XHR response
 
-## Gotchas
+Please open an issue or PR if you wish to discuss a new feature.
+
+## WebAudio Gotchas
 
 There are currently a lot of challenges with cross-platform WebAudio playback. This is likely to change soon as vendors continue fixing bugs.
 
-- You only have a limited number of AudioContext instances; re-use them where possible.
-- With `buffer: true` and `loop: false`, the audio file will only be playable *once*! You will need to load another file to re-play it.
-- Devices/browsers which do not currently support `createMediaElementSource` need to download and decode the entire audio file before it can be played.
+- Most browsers only support a limited number of AudioContext instances; re-use them where possible.
+- When using a `buffer` source that doesn't loop, the audio file will only be playable *once*! You will need to load the file again to re-play it.
+- Browsers/devices which do not support `createMediaElementSource` will need to download and decode the entire audio file before it can be played.
   - There is no means of getting progress callback for the `decodeAudioData` (this is [in discussion](https://github.com/WebAudio/web-audio-api/issues/335))
 - In iOS 9.2 Chrome (v45.0.2454.89), there is a bug where opening the app directly to the demo will not play any audio. The user will need to refresh the page in order to hear audio.
 - iOS Safari has a bug with `sampleRate` causing playback to be distorted sometimes

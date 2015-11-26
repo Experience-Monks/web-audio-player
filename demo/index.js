@@ -46,11 +46,8 @@ function start () {
   // fixed in Safari Nightly.
   var isSafari = !/Chrome/i.test(userAgent) && /Safari/i.test(userAgent)
 
-  // Chrome on iOS 9.2 works fine
-  var isIOSChrome = /CriOS/i.test(userAgent)
-
   // Ideally we would feature-detect this instead of rely on userAgent.
-  var shouldBuffer = (isMobile || isSafari) && !isIOSChrome
+  var shouldBuffer = isMobile || isSafari
 
   // Create a looping audio player with our audio context.
   // On mobile, we use the "buffer" mode to support AudioAnalyser.
