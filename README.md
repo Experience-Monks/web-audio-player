@@ -26,17 +26,22 @@ The audio streams and auto-plays on desktop. On mobile, the file is buffered, th
 
 ### Browser Support
 
-Tested with the following.
+Tested with the following browsers/devices.
 
 - Streams Audio
   - Webkit Nightly
   - FireFox 42.0
   - Chrome 46.0
-  - iOS Chrome with a [gotcha](#webaudio-gotchas) (iOS 9.2, iPhone 5S)
 - Buffers Audio
   - Samsung Galaxy S6 (Chrome 46)
-  - iOS Safari (iOS 9.2, iPhone 5S)
+  - iOS Safari
+    - iOS 9.2, iPhone 5S
+    - iOS 8.3 iPad Mini Retina
   - Safari 8.0 (OSX Yosemite)
+  - iOS Chrome
+    - iOS 8, iPhone 6, Chrome 46
+    - iOS 9.2, iPhone 5S, Chrome 45 has a [gotcha](#webaudio-gotchas) (can support streaming)
+    - iOS 8.3 iPad Mini Retina (can support streaming)
 
 ### Install
 
@@ -150,6 +155,7 @@ Some new features may be added to this module, such as:
 - Adding a few more events
 - Supporting pause/play with buffered sources if possible
 - Supporting caching or re-using the XHR response
+- Supporting a list of formats like OGG, WAV, MP3
 
 Please open an issue or PR if you wish to discuss a new feature.
 
@@ -167,6 +173,13 @@ There are currently a lot of challenges with cross-platform WebAudio playback. T
   - Also ensure all audio/video across your site uses the same `sampleRate`
 - In Chrome Android, using `buffer` and "Add to Home Screen", you can auto-play music without the need for user gesture. This is not the case with iOS "Add to Home Screen."
 - In iOS Safari, the `<audio>` tag's `load()` method needs to be called; however, this just causes a second (superfluous) request for the file in most other browsers.
+
+## See Also
+
+- [detect-audio-autoplay](https://github.com/Jam3/detect-audio-autoplay) - whether or not user input is necessary for audio playback
+- [detect-media-element-source](https://github.com/Jam3/detect-media-element-source) - whether or not `createMediaElementSource()` works as expected
+- [ios-safe-audio-context](https://github.com/Jam3/ios-safe-audio-context) - create an audio context that avoids a `sampleRate` distortion bug in iOS6+
+- [simple-media-element](https://github.com/Jam3/simple-media-element) - a tiny `<audio>` abstraction
 
 ## License
 
