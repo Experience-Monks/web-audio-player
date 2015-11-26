@@ -22,13 +22,16 @@
   },
   "devDependencies": {
     "analyser-frequency-average": "^1.0.0",
+    "browserify": "^12.0.1",
     "budo": "^6.1.0",
     "canvas-loop": "^1.0.7",
+    "uglify-js": "^2.6.1",
     "web-audio-analyser": "^2.0.0"
   },
   "scripts": {
     "test": "node test.js",
-    "start": "budo demo/index.js:bundle.js --live"
+    "start": "budo demo/index.js:bundle.js --live",
+    "build": "browserify demo/index.js | uglifyjs -cm > bundle.js"
   },
   "keywords": [
     "audio",
