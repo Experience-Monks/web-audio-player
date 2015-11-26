@@ -149,6 +149,9 @@ Some new features may be added to this module, such as:
 - Adding a seek or `play(N)` feature
 - Adding a few more events
 - Supporting pause/play with buffered sources if possible
+- Supporting caching or re-using the XHR response
+
+Please open an issue or PR if you wish to discuss a new feature.
 
 ## Gotchas
 
