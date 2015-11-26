@@ -2,6 +2,8 @@
 
 [![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
 
+[(demo)](http://jam3.github.io/web-audio-player/)
+
 A simplified cross-browser WebAudio wrapper with a narrow API. This repo also attempts to report and solve some ["Gotchas"](#gotchas) for getting WebAudio working on mobile. It targets new browsers and devices, and does not attempt to provide a non-WebAudio fallback.
 
 See [caniuse.com WebAudio API](http://caniuse.com/#feat=audio-api).
@@ -16,7 +18,7 @@ This module provides a consistent API whether you are using a media element (Chr
 
 ### Demo
 
-[visualizer demo](http://jam3.github.io/codevember/web-audio-player)
+[http://jam3.github.io/web-audio-player/](http://jam3.github.io/web-audio-player/)
 
 The demo uses [web-audio-analyser](https://github.com/hughsk/web-audio-analyser) and [analyser-frequency-average](https://github.com/Jam3/analyser-frequency-average).
 
