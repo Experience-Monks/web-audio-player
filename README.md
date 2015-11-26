@@ -4,7 +4,7 @@
 
 [(demo)](http://jam3.github.io/web-audio-player/)
 
-A simplified cross-browser WebAudio wrapper with a narrow API. This repo also attempts to report and solve some ["Gotchas"](#gotchas) for getting WebAudio working on mobile. It targets new browsers and devices, and does not attempt to provide a non-WebAudio fallback.
+A simplified cross-browser WebAudio wrapper with a narrow API. This repo also attempts to report and solve some ["WebAudio Gotchas"](#webaudio-gotchas) for getting WebAudio working on mobile. It targets new browsers and devices, and does not attempt to provide a non-WebAudio fallback.
 
 See [caniuse.com WebAudio API](http://caniuse.com/#feat=audio-api).
 
@@ -32,7 +32,7 @@ Tested with the following.
   - Webkit Nightly
   - FireFox 42.0
   - Chrome 46.0
-  - iOS Chrome with a [gotcha](#gotchas) (iOS 9.2, iPhone 5S)
+  - iOS Chrome with a [gotcha](#webaudio-gotchas) (iOS 9.2, iPhone 5S)
 - Buffers Audio
   - Samsung Galaxy S6 (Chrome 46)
   - iOS Safari (iOS 9.2, iPhone 5S)
@@ -67,7 +67,7 @@ audio.on('ended', () => {
 })
 ```
 
-For a complete mobile/desktop demo, see [demo/index.js](demo/index.js). See [Gotchas](#gotchas) for more details.
+For a complete mobile/desktop demo, see [demo/index.js](demo/index.js). See [Gotchas](#webaudio-gotchas) for more details.
 
 ## Usage
 
@@ -153,7 +153,7 @@ Some new features may be added to this module, such as:
 
 Please open an issue or PR if you wish to discuss a new feature.
 
-## Gotchas
+## WebAudio Gotchas
 
 There are currently a lot of challenges with cross-platform WebAudio playback. This is likely to change soon as vendors continue fixing bugs.
 
