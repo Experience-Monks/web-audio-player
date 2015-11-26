@@ -157,9 +157,9 @@ Please open an issue or PR if you wish to discuss a new feature.
 
 There are currently a lot of challenges with cross-platform WebAudio playback. This is likely to change soon as vendors continue fixing bugs.
 
-- You only have a limited number of AudioContext instances; re-use them where possible.
-- With `buffer: true` and `loop: false`, the audio file will only be playable *once*! You will need to load another file to re-play it.
-- Devices/browsers which do not currently support `createMediaElementSource` need to download and decode the entire audio file before it can be played.
+- Most browsers only support a limited number of AudioContext instances; re-use them where possible.
+- When using a `buffer` source that doesn't loop, the audio file will only be playable *once*! You will need to load the file again to re-play it.
+- Browsers/devices which do not support `createMediaElementSource` will need to download and decode the entire audio file before it can be played.
   - There is no means of getting progress callback for the `decodeAudioData` (this is [in discussion](https://github.com/WebAudio/web-audio-api/issues/335))
 - In iOS 9.2 Chrome (v45.0.2454.89), there is a bug where opening the app directly to the demo will not play any audio. The user will need to refresh the page in order to hear audio.
 - iOS Safari has a bug with `sampleRate` causing playback to be distorted sometimes
