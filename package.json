@@ -1,0 +1,60 @@
+{
+  "name": "web-audio-player",
+  "version": "1.0.0",
+  "description": "a cross-browser WebAudio player",
+  "main": "index.js",
+  "license": "MIT",
+  "author": {
+    "name": "Matt DesLauriers",
+    "email": "dave.des@gmail.com",
+    "url": "https://github.com/mattdesl"
+  },
+  "dependencies": {
+    "audio-resampler": "^1.0.1",
+    "events": "^1.1.0",
+    "ios-safe-audio-context": "^1.0.0",
+    "is-dom": "^1.0.5",
+    "object-assign": "^4.0.1",
+    "once": "^1.3.3",
+    "simple-media-element": "^1.0.0",
+    "xhr": "^2.2.0",
+    "xhr-progress": "0.0.0"
+  },
+  "devDependencies": {
+    "analyser-frequency-average": "^1.0.0",
+    "budo": "^6.1.0",
+    "canvas-loop": "^1.0.7",
+    "web-audio-analyser": "^2.0.0"
+  },
+  "scripts": {
+    "test": "node test.js",
+    "start": "budo demo/index.js:bundle.js --live"
+  },
+  "keywords": [
+    "audio",
+    "element",
+    "process",
+    "web",
+    "audio",
+    "webaudio",
+    "buffer",
+    "xhr",
+    "mp3",
+    "browser",
+    "browserify",
+    "webpack",
+    "tag",
+    "elements",
+    "sound",
+    "play",
+    "sfx"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Jam3/web-audio-player.git"
+  },
+  "homepage": "https://github.com/Jam3/web-audio-player",
+  "bugs": {
+    "url": "https://github.com/Jam3/web-audio-player/issues"
+  }
+}
