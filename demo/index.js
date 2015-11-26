@@ -2,12 +2,10 @@ var audioPlayer = require('../')
 var createApp = require('canvas-loop')
 var createAnalyser = require('web-audio-analyser')
 var createAudioContext = require('ios-safe-audio-context')
+var detectAutoplay = require('detect-audio-autoplay')
+var detectMediaSource = require('detect-media-element-source')
 var average = require('analyser-frequency-average')
 var once = require('once')
-
-// simple mobile test
-var userAgent = navigator.userAgent
-var isMobile = /(iPhone|iPad|Android)/i.test(userAgent)
 
 // get our canvas element & 2D context
 var canvas = document.querySelector('canvas')
@@ -22,33 +20,38 @@ var app = createApp(canvas, {
   scale: window.devicePixelRatio
 })
 
-// mobile devices need a "Click to Play"
-if (isMobile) {
-  clickToPlay.style.display = 'block'
-  loading.style.display = 'none'
-  window.addEventListener('touchend', once(function (ev) {
-    ev.preventDefault()
-    loading.style.display = 'block'
-    clickToPlay.style.display = 'none'
-    start()
-  }))
-} else {
-  start()
-}
+// some devices need a "Click to Play"
+detectAutoplay(function (autoplay) {
+  if (autoplay) {
+    canplay()
+  } else {
+    clickToPlay.style.display = 'block'
+    loading.style.display = 'none'
+    window.addEventListener('touchend', once(function (ev) {
+      ev.preventDefault()
+      loading.style.display = 'block'
+      clickToPlay.style.display = 'none'
+      canplay()
+    }))
+  }
+})
 
-function start () {
+function canplay () {
   // Create an iOS-safe AudioContext which fixes
   // potential sampleRate bugs with playback
   // (The hack needs to be called on touchend for iOS!)
   var audioContext = createAudioContext()
 
-  // Safari 8.x also needs buffering, although this is already
-  // fixed in Safari Nightly.
-  var isSafari = !/Chrome/i.test(userAgent) && /Safari/i.test(userAgent)
+  // Detect whether createMediaElementSource() works
+  // as expected. You can also use userAgent sniffing here.
+  detectMediaSource(function (supportsMediaElement) {
+    // No media element support -> we should buffer
+    var shouldBuffer = !supportsMediaElement
+    start(audioContext, shouldBuffer)
+  }, audioContext)
+}
 
-  // Ideally we would feature-detect this instead of rely on userAgent.
-  var shouldBuffer = isMobile || isSafari
-
+function start (audioContext, shouldBuffer) {
   // Create a looping audio player with our audio context.
   // On mobile, we use the "buffer" mode to support AudioAnalyser.
   var player = audioPlayer('demo/bluejean_short.mp3', {
