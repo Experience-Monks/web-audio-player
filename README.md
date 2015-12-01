@@ -173,6 +173,7 @@ There are currently a lot of challenges with cross-platform WebAudio playback. T
   - Also ensure all audio/video across your site uses the same `sampleRate`
 - In Chrome Android, using `buffer` and "Add to Home Screen", you can auto-play music without the need for user gesture. This is not the case with iOS "Add to Home Screen."
 - In iOS Safari, the `<audio>` tag's `load()` method needs to be called; however, this just causes a second (superfluous) request for the file in most other browsers.
+- In iOS Safari, audio playback must be triggered on a `'touchend'` *that isn't part of a drag action*. One solution is to attempt audio playback only when the distance and time since `'touchstart'` is less than a certain threshold.
 
 ## See Also
 
