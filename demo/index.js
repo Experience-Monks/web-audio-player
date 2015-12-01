@@ -5,7 +5,7 @@ var createAudioContext = require('ios-safe-audio-context')
 var detectAutoplay = require('detect-audio-autoplay')
 var detectMediaSource = require('detect-media-element-source')
 var average = require('analyser-frequency-average')
-var once = require('once')
+var tapEvent = require('tap-event')
 
 // get our canvas element & 2D context
 var canvas = document.querySelector('canvas')
@@ -27,12 +27,16 @@ detectAutoplay(function (autoplay) {
   } else {
     clickToPlay.style.display = 'block'
     loading.style.display = 'none'
-    window.addEventListener('touchend', once(function (ev) {
+
+    // On iOS, it has to be a tap event and not a drag + touchend...
+    var onTap = tapEvent(function (ev) {
+      window.removeEventListener('touchstart', onTap)
       ev.preventDefault()
       loading.style.display = 'block'
       clickToPlay.style.display = 'none'
       canplay()
-    }))
+    })
+    window.addEventListener('touchstart', onTap)
   }
 })
 
