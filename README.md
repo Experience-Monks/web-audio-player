@@ -65,6 +65,10 @@ audio.on('load', () => {
   
   // start playing audio file
   audio.play()
+  
+  // and connect your node somewhere, such as
+  // the AudioContext output so the user can hear it!
+  audio.node.connect(audio.context.destination)
 })
 
 audio.on('ended', () => {
