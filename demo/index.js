@@ -56,34 +56,28 @@ function canplay () {
 }
 
 function start (audioContext, shouldBuffer) {
+  // This is triggered on mobile, when decodeAudioData begins.
   // Create a looping audio player with our audio context.
   // On mobile, we use the "buffer" mode to support AudioAnalyser.
-  var player = audioPlayer('demo/bluejean_short.mp3', {
+  audioPlayer('demo/bluejean_short.mp3', {
     context: audioContext,
     buffer: shouldBuffer,
     loop: true
-  })
+  }).then(function (player) {
+    // Set up our AnalyserNode utility
+    // Make sure to use the same AudioContext as our player!
+    var audioUtil = createAnalyser(player.node, player.context, {
+      stereo: false
+    })
 
-  // Set up our AnalyserNode utility
-  // Make sure to use the same AudioContext as our player!
-  var audioUtil = createAnalyser(player.node, player.context, {
-    stereo: false
-  })
+    // The actual AnalyserNode
+    var analyser = audioUtil.analyser
 
-  // The actual AnalyserNode
-  var analyser = audioUtil.analyser
-
-  // This is triggered on mobile, when decodeAudioData begins.
-  player.once('decoding', function (amount) {
-    loading.innerText = 'Decoding...'
-  })
-
-  // This is called with 'canplay' on desktop, and after
-  // decodeAudioData on mobile.
-  player.on('load', function () {
+    // This is called with 'canplay' on desktop, and after
+    // decodeAudioData on mobile.
     loading.style.display = 'none'
 
-    console.log('Source:', player.element ? 'MediaElement' : 'Buffer')
+    console.log('Source:', player.isBuffer ? 'Buffer' : 'MediaElement')
     console.log('Playing', Math.round(player.duration) + 's of audio...')
 
     // start audio node
@@ -92,30 +86,30 @@ function start (audioContext, shouldBuffer) {
     // start the render loop
     app.on('tick', render)
     app.start()
-  })
 
-  function render () {
-    var width = app.shape[0]
-    var height = app.shape[1]
+    function render () {
+      var width = app.shape[0]
+      var height = app.shape[1]
 
-    // retina scaling
-    ctx.save()
-    ctx.scale(app.scale, app.scale)
-    ctx.clearRect(0, 0, width, height)
+      // retina scaling
+      ctx.save()
+      ctx.scale(app.scale, app.scale)
+      ctx.clearRect(0, 0, width, height)
 
-    // grab our byte frequency data for this frame
-    var freqs = audioUtil.frequencies()
+      // grab our byte frequency data for this frame
+      var freqs = audioUtil.frequencies()
 
-    // find an average signal between two Hz ranges
-    var minHz = 40
-    var maxHz = 100
-    var avg = average(analyser, freqs, minHz, maxHz)
+      // find an average signal between two Hz ranges
+      var minHz = 40
+      var maxHz = 100
+      var avg = average(analyser, freqs, minHz, maxHz)
 
-    // draw a circle
-    ctx.beginPath()
-    var radius = Math.min(width, height) / 4 * avg
-    ctx.arc(width / 2, height / 2, radius, 0, Math.PI * 2)
-    ctx.fill()
-    ctx.restore()
-  }
+      // draw a circle
+      ctx.beginPath()
+      var radius = Math.min(width, height) / 4 * avg
+      ctx.arc(width / 2, height / 2, radius, 0, Math.PI * 2)
+      ctx.fill()
+      ctx.restore()
+    }
+  }).catch(console.error.bind(console));
 }

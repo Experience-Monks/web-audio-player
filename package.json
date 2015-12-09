@@ -12,9 +12,7 @@
   "dependencies": {
     "detect-audio-autoplay": "^1.0.2",
     "detect-media-element-source": "^1.0.0",
-    "object-assign": "^4.0.1",
-    "simple-media-element": "^1.0.0",
-    "whatwg-fetch": "^0.10.1"
+    "simple-media-element": "^1.0.0"
   },
   "devDependencies": {
     "tap-event": "^1.0.0",
