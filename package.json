@@ -14,8 +14,7 @@
     "detect-media-element-source": "^1.0.0",
     "object-assign": "^4.0.1",
     "simple-media-element": "^1.0.0",
-    "xhr": "^2.2.0",
-    "xhr-progress": "0.0.0"
+    "whatwg-fetch": "^0.10.1"
   },
   "devDependencies": {
     "tap-event": "^1.0.0",
@@ -41,7 +40,7 @@
     "audio",
     "webaudio",
     "buffer",
-    "xhr",
+    "fetch",
     "mp3",
     "browser",
     "browserify",

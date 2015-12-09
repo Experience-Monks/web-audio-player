@@ -138,17 +138,29 @@ If the audio is not looping, this is called when the audio playback ends.
 
 Called with `(err)` parameters when there was an error loading, buffering or decoding the audio.
 
-#### `player.on('progress', fn)`
-
-If `buffer: true`, this will be called on the progress events of the XMLHttpRequest for the audio file (if the browser supports it). The parameters will be `(percentage, totalBytes)`.
-
-This is not called with a media element source.
-
 #### `player.on('decoding', fn)`
 
 If `buffer: true`, this will be called after the XMLHttpRequest, and before `decodeAudioData` starts. This alows you to provide an update to your user as the audio loads.
 
 This is not called with a media element source.
+
+## Dependencies
+
+If you're using buffer mode and a browser [that doesn't support fetch](http://caniuse.com/#search=fetch)
+you can polyfill it with [github/fetch](https://github.com/github/fetch).
+
+Install the module:
+
+```
+npm i --save whatwg-fetch
+```
+
+And use it before loading this library:
+
+```
+require('whatwg-fetch')
+require('web-audio-player')
+```
 
 ## Roadmap
 
@@ -158,7 +170,7 @@ Some new features may be added to this module, such as:
 - Adding a seek or `play(N)` feature
 - Adding a few more events
 - Supporting pause/play with buffered sources if possible
-- Supporting caching or re-using the XHR response
+- Supporting caching or re-using the fetch response
 - Supporting a list of formats like OGG, WAV, MP3
 
 Please open an issue or PR if you wish to discuss a new feature.
