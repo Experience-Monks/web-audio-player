@@ -62,13 +62,22 @@ function start (audioContext, shouldBuffer) {
   audioPlayer('demo/bluejean_short.mp3', {
     context: audioContext,
     buffer: shouldBuffer,
-    loop: true
+    loop: false
   }).then(function (player) {
     // Set up our AnalyserNode utility
     // Make sure to use the same AudioContext as our player!
     var audioUtil = createAnalyser(player.node, player.context, {
       stereo: false
     })
+
+    function audioEnded () {
+      console.log('Audio ended...')
+    }
+    if (player.isBuffer) {
+      player.node.onended = audioEnded
+    } else {
+      player.source.addEventListener('ended', audioEnded)
+    }
 
     // The actual AnalyserNode
     var analyser = audioUtil.analyser
