@@ -58,22 +58,26 @@ A simple example for Chrome/FF, which does not attempt to solve some of the mobi
 ```js
 var createPlayer = require('web-audio-player')
 
-var audio = createPlayer('assets/audio.mp3')
+createPlayer('assets/audio.mp3')
+  .then(function(player) {
+    // start playing audio file
+    player.play()
 
-audio.on('load', () => {
-  console.log('Audio loaded...')
-  
-  // start playing audio file
-  audio.play()
-  
-  // and connect your node somewhere, such as
-  // the AudioContext output so the user can hear it!
-  audio.node.connect(audio.context.destination)
-})
+    // and connect your node somewhere, such as
+    // the AudioContext output so the user can hear it!
+    player.node.connect(player.context.destination)
 
-audio.on('ended', () => {
-  console.log('Audio ended...')
-})
+    // do something when the audio finished playing
+    function audioEnded () {
+      console.log('Audio ended...')
+    }
+    if (player.isBuffer) {
+      player.node.onended = audioEnded
+    } else {
+      player.source.addEventListener('ended', audioEnded)
+    }
+  })
+
 ```
 
 For a complete mobile/desktop demo, see [demo/index.js](demo/index.js). See [Gotchas](#webaudio-gotchas) for more details.
@@ -114,41 +118,35 @@ The `AudioContext` being used for this player. You should re-use audio contexts 
 
 The `AudioNode` for this WebAudio player.
 
-#### `player.element`
+#### `player.isBuffer`
 
-If `buffer` is false (the source is a media element), this will be the `HTMLAudioElement` or `Audio` object that is driving the audio. 
+`true` if the source is a buffer. `false` if it's a media element.
 
-If the source is a buffer, this will be undefined.
+#### `player.source`
+
+Either the media element or the buffer.
 
 #### `player.duration`
 
 The duration of the audio track in seconds. This will most likely only return a meaningful value after the `'load'` event.
 
-### events
+## Dependencies
 
-#### `player.on('load', fn)`
+If you're using buffer mode and a browser [that doesn't support fetch](http://caniuse.com/#search=fetch)
+you can polyfill it with [github/fetch](https://github.com/github/fetch).
 
-Called when the player has loaded, and the audio can be played. With a media element, this is after `'canplay'`. With a buffer source, this is after the audio has been decoded.
+Install the module:
 
-#### `player.on('end', fn)`
+```
+npm i --save whatwg-fetch
+```
 
-If the audio is not looping, this is called when the audio playback ends.
+And use it before loading this library:
 
-#### `player.on('error', fn)`
-
-Called with `(err)` parameters when there was an error loading, buffering or decoding the audio.
-
-#### `player.on('progress', fn)`
-
-If `buffer: true`, this will be called on the progress events of the XMLHttpRequest for the audio file (if the browser supports it). The parameters will be `(percentage, totalBytes)`.
-
-This is not called with a media element source.
-
-#### `player.on('decoding', fn)`
-
-If `buffer: true`, this will be called after the XMLHttpRequest, and before `decodeAudioData` starts. This alows you to provide an update to your user as the audio loads.
-
-This is not called with a media element source.
+```
+require('whatwg-fetch')
+require('web-audio-player')
+```
 
 ## Roadmap
 
@@ -158,7 +156,7 @@ Some new features may be added to this module, such as:
 - Adding a seek or `play(N)` feature
 - Adding a few more events
 - Supporting pause/play with buffered sources if possible
-- Supporting caching or re-using the XHR response
+- Supporting caching or re-using the fetch response
 - Supporting a list of formats like OGG, WAV, MP3
 
 Please open an issue or PR if you wish to discuss a new feature.
