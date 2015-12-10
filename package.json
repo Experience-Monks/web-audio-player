@@ -10,21 +10,21 @@
     "url": "https://github.com/mattdesl"
   },
   "dependencies": {
+    "browser-media-mime-type": "^1.0.0",
     "object-assign": "^4.0.1",
     "simple-media-element": "^1.0.0",
     "xhr": "^2.2.0",
     "xhr-progress": "0.0.0"
   },
   "devDependencies": {
-    "detect-audio-autoplay": "^1.0.2",
-    "detect-media-element-source": "^1.0.0",
-    "tap-event": "^1.0.0",
     "analyser-frequency-average": "^1.0.0",
     "browserify": "^12.0.1",
     "budo": "^6.1.0",
     "canvas-loop": "^1.0.7",
+    "detect-audio-autoplay": "^1.1.0",
     "detect-media-element-source": "^1.0.1",
     "ios-safe-audio-context": "^1.0.0",
+    "tap-event": "^1.0.0",
     "uglify-js": "^2.6.1",
     "web-audio-analyser": "^2.0.0"
   },
