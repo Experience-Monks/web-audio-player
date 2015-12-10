@@ -56,9 +56,16 @@ function canplay () {
 }
 
 function start (audioContext, shouldBuffer) {
+  // List of sources, usually good to provide
+  // a back up in case MP3 isn't supported.
+  var sources = [
+    'demo/bluejean_short.mp3',
+    'demo/bluejean_short.ogg'
+  ]
+
   // Create a looping audio player with our audio context.
   // On mobile, we use the "buffer" mode to support AudioAnalyser.
-  var player = audioPlayer([ 'demo/bluejean_short.mp3', 'demo/bluejean_short.ogg' ], {
+  var player = audioPlayer(sources, {
     context: audioContext,
     buffer: shouldBuffer,
     loop: true
