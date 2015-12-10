@@ -25,12 +25,13 @@
     "detect-audio-autoplay": "^1.1.0",
     "detect-media-element-source": "^1.0.1",
     "ios-safe-audio-context": "^1.0.0",
+    "standard": "^5.4.1",
     "tap-event": "^1.0.0",
     "uglify-js": "^2.6.1",
     "web-audio-analyser": "^2.0.0"
   },
   "scripts": {
-    "test": "node test.js",
+    "test": "standard && node test.js",
     "start": "budo demo/index.js:bundle.js --live",
     "build": "browserify demo/index.js | uglifyjs -cm > bundle.js"
   },
