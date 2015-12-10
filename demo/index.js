@@ -67,7 +67,7 @@ function start (audioContext, shouldBuffer) {
   // On mobile, we use the "buffer" mode to support AudioAnalyser.
   var player = audioPlayer(sources, {
     context: audioContext,
-    buffer: shouldBuffer,
+    buffer: true,
     loop: true
   })
 
@@ -83,6 +83,10 @@ function start (audioContext, shouldBuffer) {
   // This is triggered on mobile, when decodeAudioData begins.
   player.once('decoding', function (amount) {
     loading.innerText = 'Decoding...'
+  })
+  
+  player.on('end', function () {
+    console.log('End.')
   })
 
   // This is called with 'canplay' on desktop, and after
@@ -100,6 +104,8 @@ function start (audioContext, shouldBuffer) {
     app.on('tick', render)
     app.start()
   })
+
+  window.player = player
 
   function render () {
     var width = app.shape[0]

@@ -12,6 +12,7 @@
   "dependencies": {
     "browser-media-mime-type": "^1.0.0",
     "object-assign": "^4.0.1",
+    "right-now": "^1.0.0",
     "simple-media-element": "^1.0.0",
     "xhr": "^2.2.0",
     "xhr-progress": "0.0.0"
