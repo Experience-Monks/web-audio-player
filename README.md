@@ -225,7 +225,6 @@ There are currently a lot of challenges with cross-platform WebAudio playback. T
   - `playing` getter added
   - multiple sources can be passed; will attempt to find a working format
   - emits error when no sources can be played by browser
-  - 
 - `1.0.6`
   - Buffer source can only call play() / pause() once
 
