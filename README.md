@@ -100,6 +100,7 @@ Full list of options:
 - `crossOrigin` (String) for media element sources; optional cross origin flag
 - `context` (AudioContext) an audio context to use, defaults to a new context. You should re-use contexts, and also consider [ios-safe-audio-context](https://github.com/Jam3/ios-safe-audio-context)
 - `element` (Audio|HTMLAudioElement) an optional element to use, defaults to creating a new one. Only applicable when `buffer` is false.
+- `autoResume` (Boolean) whether to resume the AudioContext during a call to `play()` if it's state is suspended; default true. This exists to fix a bug with Safari 9+ where the context defaults to being suspended.
 
 When a MediaElement is used as the source, other options will be passed to [simple-media-element](https://github.com/Jam3/simple-media-element).
 
@@ -208,6 +209,7 @@ There are currently a lot of challenges with cross-platform WebAudio playback. T
 - In iOS Safari, the `<audio>` tag's `load()` method needs to be called; however, this just causes a second (superfluous) request for the file in most other browsers.
 - In Chrome, if `audioElement.load()` is called immediately after `audioElement.play()`, no sound will occur until the next `play()` is called.
 - In iOS Safari, audio playback must be triggered on a `'touchend'` *that isn't part of a drag action*. One solution is to attempt audio playback only when the distance and time since `'touchstart'` is less than a certain threshold; see [tap-event](https://github.com/component/tap-event).
+- In Safari 9+, AudioContext state might default to "suspended" — to get around this, we resume the context when play() is called
 
 ## See Also
 
