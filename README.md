@@ -24,6 +24,10 @@ The demo uses [web-audio-analyser](https://github.com/hughsk/web-audio-analyser)
 
 The audio streams and auto-plays on desktop. On mobile, the file is buffered, then decoded, then we wait for user to initiate playback.
 
+### Detection
+
+You can use [detect-media-element-source](https://www.npmjs.com/package/detect-media-element-source) to approximately feature detect whether `createMediaElementSource` will work or not, but you may be better off just using user agent strings or defaulting to a specific behaviour for all mobile browsers.
+
 ### Browser Support
 
 Tested with the following browsers/devices.
