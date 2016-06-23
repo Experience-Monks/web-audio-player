@@ -22,7 +22,7 @@
     "browserify": "^12.0.1",
     "budo": "^8.3.0",
     "canvas-loop": "^1.0.7",
-    "detect-audio-autoplay": "^1.1.0",
+    "detect-audio-autoplay": "^1.1.1",
     "detect-media-element-source": "^1.1.1",
     "ios-safe-audio-context": "^1.0.0",
     "standard": "^5.4.1",

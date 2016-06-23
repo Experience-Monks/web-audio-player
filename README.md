@@ -214,6 +214,7 @@ There are currently a lot of challenges with cross-platform WebAudio playback. T
 - In Chrome, if `audioElement.load()` is called immediately after `audioElement.play()`, no sound will occur until the next `play()` is called.
 - In iOS Safari, audio playback must be triggered on a `'touchend'` *that isn't part of a drag action*. One solution is to attempt audio playback only when the distance and time since `'touchstart'` is less than a certain threshold; see [tap-event](https://github.com/component/tap-event).
 - In Safari 9+, AudioContext state might default to "suspended" — to get around this, we resume the context when play() is called
+- If multiple sources are provided to Safari and the first has an error, the subsequent sources may not load
 
 ## See Also
 

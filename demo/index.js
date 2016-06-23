@@ -85,8 +85,15 @@ function start (audioContext, shouldBuffer) {
     loading.innerText = 'Decoding...'
   })
 
+  // Only gets called when loop: false
   player.on('end', function () {
     console.log('Audio ended')
+  })
+
+  // If there was an error loading the audio
+  player.on('error', function (err) {
+    console.error(err.message)
+    loading.innerText = 'Error loading audio.'
   })
 
   // This is called with 'canplay' on desktop, and after
