@@ -112,6 +112,19 @@ function start (audioContext, shouldBuffer) {
     app.start()
   })
 
+  // Play/pause on tap
+  var click = function () {
+    if (player.playing) player.pause()
+    else player.play()
+    if (player.playing) {
+      clickToPlay.style.display = 'none'
+    } else {
+      clickToPlay.textContent = 'Paused'
+      clickToPlay.style.display = 'block'
+    }
+  }
+  window.addEventListener('click', click)
+
   function render () {
     var width = app.shape[0]
     var height = app.shape[1]
