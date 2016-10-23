@@ -1,6 +1,6 @@
 {
   "name": "web-audio-player",
-  "version": "1.0.3",
+  "version": "1.2.0",
   "description": "a cross-browser WebAudio player",
   "main": "index.js",
   "license": "MIT",
@@ -10,27 +10,30 @@
     "url": "https://github.com/mattdesl"
   },
   "dependencies": {
-    "detect-audio-autoplay": "^1.0.2",
-    "detect-media-element-source": "^1.0.0",
+    "browser-media-mime-type": "^1.0.0",
     "object-assign": "^4.0.1",
+    "right-now": "^1.0.0",
     "simple-media-element": "^1.0.0",
     "xhr": "^2.2.0",
     "xhr-progress": "0.0.0"
   },
   "devDependencies": {
-    "tap-event": "^1.0.0",
     "analyser-frequency-average": "^1.0.0",
     "browserify": "^12.0.1",
-    "budo": "^6.1.0",
+    "budo": "^8.3.0",
     "canvas-loop": "^1.0.7",
-    "detect-media-element-source": "^1.0.1",
+    "detect-audio-autoplay": "^1.1.1",
+    "detect-media-element-source": "^1.1.1",
     "ios-safe-audio-context": "^1.0.0",
+    "standard": "^5.4.1",
+    "tap-event": "^1.0.0",
     "uglify-js": "^2.6.1",
     "web-audio-analyser": "^2.0.0"
   },
   "scripts": {
-    "test": "node test.js",
+    "test": "standard",
     "start": "budo demo/index.js:bundle.js --live",
+    "simple": "budo demo/simple.js:bundle.js --live",
     "build": "browserify demo/index.js | uglifyjs -cm > bundle.js"
   },
   "keywords": [

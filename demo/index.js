@@ -56,9 +56,16 @@ function canplay () {
 }
 
 function start (audioContext, shouldBuffer) {
+  // List of sources, usually good to provide
+  // a back up in case MP3 isn't supported.
+  var sources = [
+    'demo/bluejean_short.mp3',
+    'demo/bluejean_short.ogg'
+  ]
+
   // Create a looping audio player with our audio context.
   // On mobile, we use the "buffer" mode to support AudioAnalyser.
-  var player = audioPlayer('demo/bluejean_short.mp3', {
+  var player = audioPlayer(sources, {
     context: audioContext,
     buffer: shouldBuffer,
     loop: true
@@ -78,6 +85,17 @@ function start (audioContext, shouldBuffer) {
     loading.innerText = 'Decoding...'
   })
 
+  // Only gets called when loop: false
+  player.on('end', function () {
+    console.log('Audio ended')
+  })
+
+  // If there was an error loading the audio
+  player.on('error', function (err) {
+    console.error(err.message)
+    loading.innerText = 'Error loading audio.'
+  })
+
   // This is called with 'canplay' on desktop, and after
   // decodeAudioData on mobile.
   player.on('load', function () {
@@ -93,6 +111,19 @@ function start (audioContext, shouldBuffer) {
     app.on('tick', render)
     app.start()
   })
+
+  // Play/pause on tap
+  var click = function () {
+    if (player.playing) player.pause()
+    else player.play()
+    if (player.playing) {
+      clickToPlay.style.display = 'none'
+    } else {
+      clickToPlay.textContent = 'Paused'
+      clickToPlay.style.display = 'block'
+    }
+  }
+  window.addEventListener('click', click)
 
   function render () {
     var width = app.shape[0]
