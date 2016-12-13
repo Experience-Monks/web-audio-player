@@ -101,6 +101,8 @@ Full list of options:
 - `volume` (Number) volume to play at
 - `buffer` (Boolean) whether to use a Buffer source, default false
 - `loop` (Boolean) whether to loop the playback, default false
+- `loopStart` (Number) point to restart loop in seconds, default 0
+- `loopEnd` (Number) point to end loop and restart in seconds, default 0
 - `crossOrigin` (String) for media element sources; optional cross origin flag
 - `context` (AudioContext) an audio context to use, defaults to a new context. You should re-use contexts, and also consider [ios-safe-audio-context](https://github.com/Jam3/ios-safe-audio-context)
 - `element` (Audio|HTMLAudioElement) an optional element to use, defaults to creating a new one. Only applicable when `buffer` is false.
