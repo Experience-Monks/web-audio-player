@@ -67,9 +67,9 @@ function start (audioContext, shouldBuffer) {
   // On mobile, we use the "buffer" mode to support AudioAnalyser.
   var player = audioPlayer(sources, {
     context: audioContext,
-    buffer: shouldBuffer,
-    loopStart: 1,
-    loopEnd: 2,
+    buffer: true,
+    loopStart: 2,
+    // loopEnd: 4,
     loop: true
   })
 
