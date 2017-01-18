@@ -68,8 +68,6 @@ function start (audioContext, shouldBuffer) {
   var player = audioPlayer(sources, {
     context: audioContext,
     buffer: true,
-    loopStart: 2,
-    // loopEnd: 4,
     loop: true
   })
 
