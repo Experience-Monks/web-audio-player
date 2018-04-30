@@ -30,13 +30,13 @@ detectAutoplay(function (autoplay) {
 
     // On iOS, it has to be a tap event and not a drag + touchend...
     var onTap = tapEvent(function (ev) {
-      window.removeEventListener('touchstart', onTap)
+      window.removeEventListener('touchend', onTap)
       ev.preventDefault()
       loading.style.display = 'block'
       clickToPlay.style.display = 'none'
       canplay()
     })
-    window.addEventListener('touchstart', onTap)
+    window.addEventListener('touchend', onTap)
   }
 })
 
