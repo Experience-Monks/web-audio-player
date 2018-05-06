@@ -21,24 +21,24 @@ var app = createApp(canvas, {
 })
 
 // some devices need a "Click to Play"
-detectAutoplay(function (autoplay) {
-  if (autoplay) {
-    canplay()
-  } else {
-    clickToPlay.style.display = 'block'
-    loading.style.display = 'none'
+clickToPlay.style.display = 'block'
+loading.style.display = 'none'
 
-    // On iOS, it has to be a tap event and not a drag + touchend...
-    var onTap = tapEvent(function (ev) {
-      window.removeEventListener('touchstart', onTap)
-      ev.preventDefault()
-      loading.style.display = 'block'
-      clickToPlay.style.display = 'none'
-      canplay()
-    })
-    window.addEventListener('touchstart', onTap)
-  }
-})
+// On iOS, it has to be a tap event and not a drag + touchend...
+var onTap, onMouseDown
+
+onMouseDown = function (ev) {
+  window.removeEventListener('touchstart', onTap)
+  window.removeEventListener('mousedown', onMouseDown)
+  ev.preventDefault()
+  loading.style.display = 'block'
+  clickToPlay.style.display = 'none'
+  canplay()
+}
+onTap = tapEvent(onMouseDown)
+
+window.addEventListener('touchstart', onTap)
+window.addEventListener('mousedown', onMouseDown)
 
 function canplay () {
   // Create an iOS-safe AudioContext which fixes
