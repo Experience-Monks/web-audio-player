@@ -1,6 +1,6 @@
 {
   "name": "web-audio-player",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "a cross-browser WebAudio player",
   "main": "index.js",
   "license": "MIT",
