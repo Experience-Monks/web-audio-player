@@ -112,9 +112,9 @@ When a MediaElement is used as the source, other options will be passed to [simp
 
 > :warning: For accurate `loopStart` and `loopEnd` results, you should use a buffer source. MediaElement sources fall back to using a requestAnimationFrame timer, which is less robust, especially when the tab is out of view.
 
-#### `player.play()`
+#### `player.play([seek])`
 
-Plays the audio, resuming it from a paused state.
+Plays the audio, resuming it from a paused state (with an optional seek parameter to adjust currentTime).
 
 #### `player.pause()`
 
@@ -161,6 +161,10 @@ A read-only boolean to determine whether the audio node is currently playing.
 #### `player.volume`
 
 A getter/setter for the `player.node.gain` value, which allows you to adjust the volume during playback. 
+
+#### `player.currentTime`
+
+A getter/setter for the `audio.currentTime` value, which allows you to seek. 
 
 ### events
 
